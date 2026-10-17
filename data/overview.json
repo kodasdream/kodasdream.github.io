@@ -1,0 +1,451 @@
+{
+  "source": {
+    "file": "Strength Sheet.xlsx, Lifting folder on Google Drive",
+    "sheet": "Overview",
+    "changed": "2026-10-14",
+    "copied": "2026-10-17"
+  },
+  "lifts": [
+    {
+      "sheet": "Leg Extensions",
+      "name": "Leg Extensions",
+      "reps": 112,
+      "kg": 255,
+      "est": 732,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Leg Press 45°",
+      "name": "Leg Press 45°",
+      "reps": 53,
+      "kg": 355.5,
+      "est": 983,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Machine Preacher Curl",
+      "name": "Machine Preacher Curl",
+      "reps": 34,
+      "kg": 150,
+      "est": 320,
+      "part": "Biceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Incline Dumbell Press 30°",
+      "name": "Incline dumbbell press 30°",
+      "reps": 94,
+      "kg": 40,
+      "est": 165.3,
+      "part": "Chest",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Delt Press Machine",
+      "name": "Delt Press Machine",
+      "reps": 95,
+      "kg": 100,
+      "est": 416.7,
+      "part": "Shoulders",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Seated Cable Row",
+      "name": "Seated Cable Row",
+      "reps": 60,
+      "kg": 130,
+      "est": 390,
+      "part": "Back",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Hammer Dumbbell Curl",
+      "name": "Hammer Dumbbell Curl",
+      "reps": 52,
+      "kg": 40,
+      "est": 109.4,
+      "part": "Biceps",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Chest Press Machine",
+      "name": "Chest Press Machine",
+      "reps": 100,
+      "kg": 100,
+      "est": 433.3,
+      "part": "Chest",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Dips",
+      "name": "Dips",
+      "reps": 90,
+      "kg": 0,
+      "est": 300,
+      "part": "Triceps",
+      "kind": "Bodyweight"
+    },
+    {
+      "sheet": "T-bar rows",
+      "name": "T-bar rows",
+      "reps": 51,
+      "kg": 116,
+      "est": 313.2,
+      "part": "Back",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Seated Calf Raise",
+      "name": "Seated Calf Raise",
+      "reps": 72,
+      "kg": 145,
+      "est": 493,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Bentover Barbell Row",
+      "name": "Bent-over barbell row",
+      "reps": 55,
+      "kg": 100,
+      "est": 286,
+      "part": "Back",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Chest Supported DB row",
+      "name": "Chest Supported DB row",
+      "reps": 90,
+      "kg": 40,
+      "est": 160,
+      "part": "Back",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Adductor",
+      "name": "Adductor",
+      "reps": 67,
+      "kg": 145,
+      "est": 468.3,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Squat",
+      "name": "Squat",
+      "reps": 1,
+      "kg": 382,
+      "est": 382,
+      "part": "Legs",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "One arm DB Row",
+      "name": "One arm DB Row",
+      "reps": 58,
+      "kg": 60,
+      "est": 175.3,
+      "part": "Back",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Rope Hammer Curl",
+      "name": "Rope Hammer Curl",
+      "reps": 30,
+      "kg": 42.3,
+      "est": 84.6,
+      "part": "Biceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Overhead Press",
+      "name": "Overhead Press",
+      "reps": 53,
+      "kg": 80,
+      "est": 221,
+      "part": "Shoulders",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Smith Bench Press",
+      "name": "Smith Bench Press",
+      "reps": 30,
+      "kg": 149,
+      "est": 298,
+      "part": "Chest",
+      "kind": "Smith"
+    },
+    {
+      "sheet": "Pullups",
+      "name": "Pull-ups",
+      "reps": 43,
+      "kg": 0,
+      "est": 161,
+      "part": "Back",
+      "kind": "Bodyweight"
+    },
+    {
+      "sheet": "Lying Leg Curl",
+      "name": "Lying Leg Curl",
+      "reps": 41,
+      "kg": 90,
+      "est": 213,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Sled Press Calf Raise 45°",
+      "name": "Sled Press Calf Raise 45°",
+      "reps": 19,
+      "kg": 510,
+      "est": 833,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Flat bench",
+      "name": "Flat bench",
+      "reps": 40,
+      "kg": 110,
+      "est": 256.7,
+      "part": "Chest",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Cable Lateral Raise",
+      "name": "Cable Lateral Raise",
+      "reps": 32,
+      "kg": 40,
+      "est": 82.7,
+      "part": "Shoulders",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Lat Pulldown",
+      "name": "Lat Pulldown",
+      "reps": 26,
+      "kg": 110,
+      "est": 205.3,
+      "part": "Back",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Barbell Curl",
+      "name": "Barbell Curl",
+      "reps": 18,
+      "kg": 80,
+      "est": 128,
+      "part": "Biceps",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "DB Lateral Raise",
+      "name": "DB Lateral Raise",
+      "reps": 36,
+      "kg": 24,
+      "est": 52.8,
+      "part": "Shoulders",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Pushups",
+      "name": "Push-ups",
+      "reps": 109,
+      "kg": 0,
+      "est": 440,
+      "part": "Chest",
+      "kind": "Bodyweight"
+    },
+    {
+      "sheet": "Abductor",
+      "name": "Abductor",
+      "reps": 85,
+      "kg": 100,
+      "est": 383.3,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Hip Thrusts",
+      "name": "Hip Thrusts",
+      "reps": 60,
+      "kg": 140,
+      "est": 420,
+      "part": "Legs",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Dumbell Curl",
+      "name": "Dumbbell curl",
+      "reps": 60,
+      "kg": 20,
+      "est": 60,
+      "part": "Biceps",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Seated DB Shoulder Press 70°",
+      "name": "Seated DB Shoulder Press 70°",
+      "reps": 49,
+      "kg": 30,
+      "est": 79,
+      "part": "Shoulders",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Seated Leg Curl",
+      "name": "Seated Leg Curl",
+      "reps": 34,
+      "kg": 106,
+      "est": 226.1,
+      "part": "Legs",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Standing DB Shoulder Press",
+      "name": "Standing DB Shoulder Press",
+      "reps": 58,
+      "kg": 27,
+      "est": 79.2,
+      "part": "Shoulders",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Triceps Rope Pushdown",
+      "name": "Triceps Rope Pushdown",
+      "reps": 6,
+      "kg": 96,
+      "est": 111,
+      "part": "Triceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Deadlift",
+      "name": "Deadlift",
+      "reps": 1,
+      "kg": 298,
+      "est": 298,
+      "part": "Back",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Smith Shoulder Press 70°",
+      "name": "Smith Shoulder Press 70°",
+      "reps": 22,
+      "kg": 90,
+      "est": 156.3,
+      "part": "Shoulders",
+      "kind": "Smith"
+    },
+    {
+      "sheet": "Triceps Extension Machine",
+      "name": "Triceps Extension Machine",
+      "reps": 26,
+      "kg": 65,
+      "est": 121.3,
+      "part": "Triceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Lying Incline DB Curl",
+      "name": "Lying Incline DB Curl",
+      "reps": 14,
+      "kg": 27,
+      "est": 39.6,
+      "part": "Biceps",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Triceps Pushdown",
+      "name": "Triceps Pushdown",
+      "reps": 1,
+      "kg": 130,
+      "est": 130,
+      "part": "Triceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Barbell Shrug",
+      "name": "Barbell Shrug",
+      "reps": 60,
+      "kg": 100,
+      "est": 300,
+      "part": "Back",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "French Bar Curl",
+      "name": "French Bar Curl",
+      "reps": 1,
+      "kg": 92,
+      "est": 92,
+      "part": "Biceps",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Incline Bench Press 30°",
+      "name": "Incline Bench Press 30°",
+      "reps": 40,
+      "kg": 102,
+      "est": 238,
+      "part": "Chest",
+      "kind": "Barbell"
+    },
+    {
+      "sheet": "Grip Strength (1 hand)",
+      "name": "Grip Strength (1 hand)",
+      "reps": 1,
+      "kg": 109,
+      "est": 109,
+      "part": "Forearms",
+      "kind": "Bodyweight"
+    },
+    {
+      "sheet": "Pec Fly Machine",
+      "name": "Pec Fly Machine",
+      "reps": 26,
+      "kg": 90,
+      "est": 168,
+      "part": "Chest",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Straightbar cable bicep curl",
+      "name": "Straight bar cable bicep curl",
+      "reps": 10,
+      "kg": 80,
+      "est": 106.6,
+      "part": "Biceps",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Nautilus Straight Pulldown",
+      "name": "Nautilus Straight Pulldown",
+      "reps": 14,
+      "kg": 80,
+      "est": 117.3,
+      "part": "Back",
+      "kind": "Machine"
+    },
+    {
+      "sheet": "Db Fly",
+      "name": "DB fly",
+      "reps": 10,
+      "kg": 40,
+      "est": 52,
+      "part": "Chest",
+      "kind": "Dumbbell"
+    },
+    {
+      "sheet": "Walking Lunge",
+      "name": "Walking Lunge",
+      "reps": 11,
+      "kg": 80,
+      "est": 109.3,
+      "part": "Legs",
+      "kind": "Barbell"
+    }
+  ]
+}
