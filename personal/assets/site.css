@@ -1,21 +1,36 @@
-/* Matte neumorphism on near-black: flat surfaces, soft shadows from two directions, one muted green accent.
-   No glow, no gradients, no gloss. Shared by the personal page and the lifting page. */
+/* Shared stylesheet for the personal page and the lifting page.
+   Look: neumorphic paper. Warm grey-beige surfaces, soft raised and pressed shadows from two directions, a Newsreader
+   serif for the name and headings, one muted green accent.
+   Every colour, radius and shadow is a token on :root, so a theme only redefines tokens.
+   No glow, no gradients, no gloss, no coloured blur. */
 
 :root {
-  color-scheme: dark;
-  --surface: #17181c;
-  --shade: rgba(0, 0, 0, 0.55);
-  --lit: rgba(255, 255, 255, 0.05);
-  --text: #eceef1;
-  --text-2: #b1b5bd;
-  --text-3: #8d9199;
-  --accent: #8cc152;
+  color-scheme: light;
+  --surface: #ece8df;
+  --card: #ece8df;
+  --well: #ece8df;
+  --shade: rgba(122, 110, 92, 0.2);
+  --lit: rgba(255, 253, 248, 0.75);
+  --text: #201d18;
+  --text-2: #4b463d;
+  --text-3: #6b6457;
+  --line: rgba(32, 29, 24, 0.09);
+  --track: #c9c0af;
+  --rail: #cbc2b0;
+  --accent: #2f6a3b;
+  --accent-hover: #234f2c;
+  --hover: #2f6a3b;
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --raised-lg: 10px 10px 22px var(--shade), -10px -10px 22px var(--lit);
-  --raised: 7px 7px 16px var(--shade), -7px -7px 16px var(--lit);
-  --raised-sm: 4px 4px 10px var(--shade), -4px -4px 10px var(--lit);
-  --inset: inset 7px 7px 14px var(--shade), inset -7px -7px 14px var(--lit);
-  --inset-sm: inset 3px 3px 7px var(--shade), inset -3px -3px 7px var(--lit);
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --r-lg: 26px;
+  --r-md: 20px;
+  --r-sm: 15px;
+  --r-xs: 12px;
+  --raised-lg: 6px 6px 14px var(--shade), -6px -6px 14px var(--lit);
+  --raised: 4px 4px 10px var(--shade), -4px -4px 10px var(--lit);
+  --raised-sm: 3px 3px 7px var(--shade), -3px -3px 7px var(--lit);
+  --inset: inset 4px 4px 9px var(--shade), inset -4px -4px 9px var(--lit);
+  --inset-sm: inset 2px 2px 5px var(--shade), inset -2px -2px 5px var(--lit);
 }
 
 *,
@@ -48,10 +63,20 @@ h2,
 h3,
 p,
 ul,
+ol,
 dl,
 dd {
   margin: 0;
   padding: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--display);
+}
+
+h3 {
+  font-family: var(--font);
 }
 
 ul {
@@ -86,8 +111,8 @@ a {
   top: -60px;
   z-index: 20;
   padding: 8px 14px;
-  border-radius: 12px;
-  background: var(--surface);
+  border-radius: var(--r-xs);
+  background: var(--card);
   box-shadow: var(--raised-sm);
   color: var(--text);
   text-decoration: none;
@@ -106,14 +131,14 @@ a {
 /* ---------- surfaces ---------- */
 
 .raised {
-  background: var(--surface);
-  border-radius: 28px;
+  background: var(--card);
+  border-radius: var(--r-lg);
   box-shadow: var(--raised-lg);
 }
 
 .inset {
-  background: var(--surface);
-  border-radius: 22px;
+  background: var(--well);
+  border-radius: var(--r-md);
   box-shadow: var(--inset);
 }
 
@@ -142,8 +167,8 @@ a {
   min-height: 48px;
   padding: 0 22px;
   border: 0;
-  border-radius: 16px;
-  background: var(--surface);
+  border-radius: var(--r-sm);
+  background: var(--card);
   color: var(--text);
   font: 600 15px/1 var(--font);
   text-decoration: none;
@@ -154,7 +179,7 @@ a {
 }
 
 .btn:hover {
-  color: #ffffff;
+  color: var(--hover);
 }
 
 .btn:active,
@@ -167,13 +192,13 @@ a {
 }
 
 .btn-primary:hover {
-  color: #b4dc84;
+  color: var(--accent-hover);
 }
 
 .btn-sm {
   min-height: 38px;
   padding: 0 16px;
-  border-radius: 13px;
+  border-radius: var(--r-xs);
   font-size: 14px;
   box-shadow: var(--raised-sm);
 }
@@ -187,14 +212,14 @@ a {
   color: var(--accent);
 }
 
-/* Switch from the reference: an inset track with a raised knob and a green ring. */
+/* The switch: an inset track with a raised knob and a flat accent ring (a hard edge, not a glow). */
 .switch {
   position: relative;
   flex: none;
   width: 56px;
   height: 32px;
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--well);
   box-shadow: var(--inset-sm);
 }
 
@@ -206,7 +231,7 @@ a {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--raised-sm), inset 0 0 0 2px var(--accent);
 }
 
@@ -229,8 +254,9 @@ a {
 }
 
 .brand {
-  font-size: 16px;
-  font-weight: 600;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--text);
   text-decoration: none;
@@ -242,7 +268,7 @@ a {
   gap: 4px;
   padding: 5px;
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--well);
   box-shadow: var(--inset-sm);
 }
 
@@ -259,16 +285,18 @@ a {
   color: var(--text);
 }
 
-.nav a[aria-current="true"] {
+.nav a[aria-current="true"],
+.nav a[aria-current="page"] {
   color: var(--text);
+  background: var(--card);
   box-shadow: var(--raised-sm);
 }
 
-/* ---------- hero ---------- */
+/* ---------- top card: the part to send to friends ---------- */
 
 .hero {
   display: grid;
-  gap: clamp(32px, 5vw, 48px);
+  gap: clamp(28px, 4vw, 44px);
   margin-top: clamp(12px, 3vw, 28px);
   padding: clamp(28px, 5vw, 56px);
 }
@@ -280,6 +308,47 @@ a {
   min-width: 0;
 }
 
+.profile {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  justify-items: start;
+  min-width: 0;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--raised);
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--text);
+}
+
+.intro {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.role {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.bio {
+  max-width: 42ch;
+  font-size: 17px;
+  color: var(--text-2);
+}
+
 .status {
   display: flex;
   align-items: center;
@@ -288,56 +357,83 @@ a {
   color: var(--text-2);
 }
 
-h1 {
-  font-size: clamp(42px, 6.6vw, 68px);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
-  color: var(--text);
+.linkstack {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  justify-items: start;
+  min-width: 0;
 }
 
-.role {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--text);
+.linkcards {
+  display: grid;
+  gap: 12px;
+  width: 100%;
 }
 
-.lede {
-  max-width: 58ch;
-  font-size: 17px;
-  color: var(--text-2);
-}
-
-.actions {
+.linkcard {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 14px;
-  margin-top: 6px;
+  width: 100%;
+  min-width: 0;
+  padding: 16px 20px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--raised-sm);
+  color: var(--text);
+  font: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.18s ease;
 }
 
+a.linkcard:hover,
+a.linkcard:active {
+  box-shadow: var(--inset-sm);
+}
+
+.lc-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.lc-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lc-sub {
+  font-size: 14px;
+  color: var(--text-3);
+  overflow-wrap: anywhere;
+}
+
+.lc-go {
+  flex: none;
+  font-size: 16px;
+  color: var(--text-3);
+}
+
+/* Quick facts sit between the top card and the CV sections. */
 .facts {
   display: grid;
   gap: 18px;
-  align-content: start;
+  margin-top: clamp(28px, 4vw, 48px);
   padding: 26px 28px;
 }
 
 .facts dl {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .facts dl > div {
   display: grid;
   gap: 4px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.facts dl > div:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
 }
 
 .facts dt {
@@ -350,11 +446,27 @@ h1 {
   color: var(--text);
 }
 
+.hero h1,
+h1 {
+  font-size: clamp(42px, 6vw, 62px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.lede {
+  max-width: 58ch;
+  font-size: 17px;
+  color: var(--text-2);
+}
+
 /* ---------- headings and sections ---------- */
 
 h2 {
   font-size: clamp(28px, 3.6vw, 40px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.025em;
   text-wrap: balance;
@@ -392,28 +504,6 @@ h3 {
   grid-template-columns: minmax(0, 1fr);
 }
 
-@media (min-width: 640px) {
-  .grid.two,
-  .grid.auto {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .wide,
-  .big.feature {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 960px) {
-  .grid.auto {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .wide {
-    grid-column: span 2;
-  }
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -438,6 +528,10 @@ h3 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
+}
+
+.wide {
+  grid-column: 1 / -1;
 }
 
 /* Achievement gauge: two inset meters. The shorter bar is the better FID. */
@@ -472,7 +566,7 @@ h3 {
   height: 14px;
   padding: 3px;
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--well);
   box-shadow: var(--inset-sm);
 }
 
@@ -485,7 +579,7 @@ h3 {
 }
 
 .meter i.base {
-  background: #5d616b;
+  background: var(--track);
 }
 
 /* ---------- work history ---------- */
@@ -495,8 +589,8 @@ h3 {
   display: grid;
   gap: 30px;
   padding: 36px clamp(20px, 3vw, 40px) 36px 60px;
-  border-radius: 28px;
-  background: var(--surface);
+  border-radius: var(--r-lg);
+  background: var(--well);
   box-shadow: var(--inset);
 }
 
@@ -515,7 +609,7 @@ h3 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--raised-sm);
 }
 
@@ -527,7 +621,7 @@ h3 {
   bottom: -30px;
   width: 2px;
   border-radius: 2px;
-  background: #111215;
+  background: var(--rail);
 }
 
 .timeline time {
@@ -571,7 +665,7 @@ h3 {
   min-height: 34px;
   padding: 0 14px;
   border-radius: 999px;
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--raised-sm);
   font-size: 14px;
   color: var(--text-2);
@@ -589,7 +683,7 @@ h3 {
   align-items: center;
   gap: 14px;
   padding: 16px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--line);
 }
 
 .row:last-child {
@@ -606,7 +700,7 @@ h3 {
 .row > a {
   justify-self: start;
   text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.25);
+  text-decoration-color: var(--text-3);
   text-underline-offset: 4px;
 }
 
@@ -650,7 +744,7 @@ h3 {
   display: grid;
   gap: 6px;
   padding: 24px;
-  border-radius: 22px;
+  border-radius: var(--r-md);
 }
 
 .digits {
@@ -759,8 +853,8 @@ h3 {
   flex-direction: column;
   gap: 10px;
   padding: 20px;
-  border-radius: 20px;
-  background: var(--surface);
+  border-radius: var(--r-md);
+  background: var(--card);
   box-shadow: var(--raised-sm);
 }
 
@@ -811,12 +905,39 @@ h3 {
   color: var(--text-3);
 }
 
-/* ---------- small screens ---------- */
+/* ---------- breakpoints ---------- */
+
+@media (min-width: 640px) {
+  .grid.two,
+  .grid.auto {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wide,
+  .big.feature {
+    grid-column: 1 / -1;
+  }
+
+  .facts dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 32px;
+  }
+}
+
+@media (min-width: 960px) {
+  .grid.auto {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .wide {
+    grid-column: span 2;
+  }
+}
 
 @media (min-width: 900px) {
   .hero {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
   }
 
   .hero.single {
@@ -836,6 +957,14 @@ h3 {
 
   .card,
   .big {
+    padding: 22px;
+  }
+
+  .linkcard {
+    padding: 14px 16px;
+  }
+
+  .facts {
     padding: 22px;
   }
 
@@ -877,7 +1006,8 @@ h3 {
   }
 
   .btn,
-  .nav a {
+  .nav a,
+  .linkcard {
     transition: none;
   }
 }
