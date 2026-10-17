@@ -1,4 +1,4 @@
-// Builds lifting/index.html from data/overview.json, a copy of the Overview page of the Strength Sheet.
+// Builds personal/lifting/index.html from data/overview.json, a copy of the Overview page of the Strength Sheet.
 // Run from the repo root: node tools/make-lifting.mjs
 import fs from 'node:fs';
 import path from 'node:path';
@@ -42,10 +42,10 @@ const partsShown = PARTS.filter((part) => rest.some((lift) => lift.part === part
 const bigCard = ({ lift, item }, index) => `
         <article class="big raised${index === 0 ? ' feature' : ''}">
           <div class="big-head">
-            <p class="tag">${esc(lift.kind)} · ${esc(lift.part)}</p>
+            <p class="eyebrow">${esc(lift.kind)} · ${esc(lift.part)}</p>
             <h3>${esc(item.label)}</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">${num(lift.est)}</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">${lb(lift.est)} lb</p>
@@ -58,7 +58,7 @@ const bigCard = ({ lift, item }, index) => `
         </article>`;
 
 const liftCard = (lift) => `
-          <li class="lift raised" data-part="${esc(lift.part)}" data-search="${esc(`${lift.name} ${lift.kind} ${lift.part}`.toLowerCase())}">
+          <li class="lift" data-part="${esc(lift.part)}" data-search="${esc(`${lift.name} ${lift.kind} ${lift.part}`.toLowerCase())}">
             <div class="lift-top">
               <h3>${esc(lift.name)}</h3>
               <span class="tag-kind">${esc(lift.kind)}</span>
@@ -68,8 +68,8 @@ const liftCard = (lift) => `
           </li>`;
 
 const filterButtons = [
-  '<button type="button" data-filter="all" aria-pressed="true">All</button>',
-  ...partsShown.map((part) => `<button type="button" data-filter="${part}" aria-pressed="false">${part}</button>`),
+  '<button class="btn btn-sm" type="button" data-filter="all" aria-pressed="true">All</button>',
+  ...partsShown.map((part) => `<button class="btn btn-sm" type="button" data-filter="${part}" aria-pressed="false">${part}</button>`),
 ].join('\n          ');
 
 const page = `<!doctype html>
@@ -79,11 +79,11 @@ const page = `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Best lifts, Zsombor Cservid</title>
   <meta name="description" content="Best sets and estimated one-rep maxes from the Overview page of my Strength Sheet.">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#17181c">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -91,11 +91,8 @@ const page = `<!doctype html>
 
   <header class="topbar">
     <div class="wrap bar">
-      <a class="brand" href="../">
-        <span class="monogram" aria-hidden="true">ZC</span>
-        <span class="brand-name">Zsombor Cservid</span>
-      </a>
-      <nav aria-label="Pages">
+      <a class="brand" href="../">Zsombor Cservid</a>
+      <nav class="nav" aria-label="Pages">
         <a href="../">Main page</a>
         <a href="#all-lifts">All lifts</a>
       </nav>
@@ -104,12 +101,8 @@ const page = `<!doctype html>
 
   <main id="main" class="wrap">
     <section class="hero raised single" aria-labelledby="lift-title">
-      <span class="screw s-tl" aria-hidden="true"></span>
-      <span class="screw s-tr" aria-hidden="true"></span>
-      <span class="screw s-bl" aria-hidden="true"></span>
-      <span class="screw s-br" aria-hidden="true"></span>
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="led" aria-hidden="true"></span>Lifting</p>
+      <div class="hero-main">
+        <p class="status"><span class="switch" aria-hidden="true"></span>Lifting</p>
         <h1 id="lift-title">Best lifts</h1>
         <p class="lede">Competitive bodybuilder and powerlifter. Leg extension world record holder. These are my best sets and estimated one-rep maxes from the Overview page of my Strength Sheet.</p>
         <p class="meta">${lifts.length} lifts · last changed on the sheet ${longDate(source.changed)}</p>
@@ -118,20 +111,20 @@ const page = `<!doctype html>
 
     <section class="block" aria-labelledby="top-title">
       <header class="head">
-        <p class="kicker">Top five</p>
+        <p class="eyebrow">Top five</p>
         <h2 id="top-title">The big five</h2>
       </header>
-      <div class="big-grid">${featured.map(bigCard).join('')}
+      <div class="grid two">${featured.map(bigCard).join('')}
       </div>
     </section>
 
     <section class="block" id="all-lifts" aria-labelledby="all-title">
       <header class="head">
-        <p class="kicker">All lifts</p>
-        <h2 id="all-title">The other ${rest.length}</h2>
+        <p class="eyebrow">All lifts</p>
+        <h2 id="all-title">All other lifts</h2>
       </header>
       <div class="toolbar">
-        <label class="search well">
+        <label class="search inset">
           <span class="sr-only">Search lifts</span>
           <input type="search" id="lift-search" placeholder="Search lifts" autocomplete="off">
         </label>
@@ -140,12 +133,12 @@ const page = `<!doctype html>
         </div>
       </div>
       <p class="count" id="lift-count" aria-live="polite">${rest.length} lifts shown</p>
-      <ul class="lift-grid">${rest.map(liftCard).join('')}
+      <ul class="grid auto lift-grid">${rest.map(liftCard).join('')}
       </ul>
     </section>
 
     <section class="block" aria-labelledby="notes-title">
-      <div class="card raised notes">
+      <div class="card raised">
         <h2 id="notes-title">How to read these numbers</h2>
         <ul class="plain">
           <li><strong>Best set</strong> is the reps and kg on the Overview page for that lift.</li>
@@ -167,7 +160,7 @@ const page = `<!doctype html>
     var search = document.getElementById('lift-search');
     var count = document.getElementById('lift-count');
     var buttons = Array.prototype.slice.call(document.querySelectorAll('.filters button'));
-    var items = Array.prototype.slice.call(document.querySelectorAll('.lift-grid > li'));
+    var items = Array.prototype.slice.call(document.querySelectorAll('.lift-grid > li, .grid.auto > li'));
     var part = 'all';
 
     function apply() {
@@ -197,6 +190,6 @@ const page = `<!doctype html>
 </html>
 `;
 
-fs.mkdirSync(path.join(ROOT, 'lifting'), { recursive: true });
-fs.writeFileSync(path.join(ROOT, 'lifting', 'index.html'), page);
-console.log(`Wrote lifting/index.html: ${featured.length} featured lifts, ${rest.length} more.`);
+fs.mkdirSync(path.join(ROOT, 'personal', 'lifting'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'personal', 'lifting', 'index.html'), page);
+console.log(`Wrote personal/lifting/index.html: ${featured.length} featured lifts, ${rest.length} more.`);

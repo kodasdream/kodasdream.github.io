@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Best lifts, Zsombor Cservid</title>
   <meta name="description" content="Best sets and estimated one-rep maxes from the Overview page of my Strength Sheet.">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#17181c">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -17,11 +17,8 @@
 
   <header class="topbar">
     <div class="wrap bar">
-      <a class="brand" href="../">
-        <span class="monogram" aria-hidden="true">ZC</span>
-        <span class="brand-name">Zsombor Cservid</span>
-      </a>
-      <nav aria-label="Pages">
+      <a class="brand" href="../">Zsombor Cservid</a>
+      <nav class="nav" aria-label="Pages">
         <a href="../">Main page</a>
         <a href="#all-lifts">All lifts</a>
       </nav>
@@ -30,12 +27,8 @@
 
   <main id="main" class="wrap">
     <section class="hero raised single" aria-labelledby="lift-title">
-      <span class="screw s-tl" aria-hidden="true"></span>
-      <span class="screw s-tr" aria-hidden="true"></span>
-      <span class="screw s-bl" aria-hidden="true"></span>
-      <span class="screw s-br" aria-hidden="true"></span>
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="led" aria-hidden="true"></span>Lifting</p>
+      <div class="hero-main">
+        <p class="status"><span class="switch" aria-hidden="true"></span>Lifting</p>
         <h1 id="lift-title">Best lifts</h1>
         <p class="lede">Competitive bodybuilder and powerlifter. Leg extension world record holder. These are my best sets and estimated one-rep maxes from the Overview page of my Strength Sheet.</p>
         <p class="meta">49 lifts · last changed on the sheet 14 Oct 2026</p>
@@ -44,16 +37,16 @@
 
     <section class="block" aria-labelledby="top-title">
       <header class="head">
-        <p class="kicker">Top five</p>
+        <p class="eyebrow">Top five</p>
         <h2 id="top-title">The big five</h2>
       </header>
-      <div class="big-grid">
+      <div class="grid two">
         <article class="big raised feature">
           <div class="big-head">
-            <p class="tag">Machine · Legs</p>
+            <p class="eyebrow">Machine · Legs</p>
             <h3>Leg extension</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">732</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">1,614 lb</p>
@@ -66,10 +59,10 @@
         </article>
         <article class="big raised">
           <div class="big-head">
-            <p class="tag">Barbell · Legs</p>
+            <p class="eyebrow">Barbell · Legs</p>
             <h3>Squat</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">382</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">842 lb</p>
@@ -82,10 +75,10 @@
         </article>
         <article class="big raised">
           <div class="big-head">
-            <p class="tag">Barbell · Back</p>
+            <p class="eyebrow">Barbell · Back</p>
             <h3>Deadlift</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">298</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">657 lb</p>
@@ -98,10 +91,10 @@
         </article>
         <article class="big raised">
           <div class="big-head">
-            <p class="tag">Barbell · Chest</p>
+            <p class="eyebrow">Barbell · Chest</p>
             <h3>Bench press</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">256.7</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">566 lb</p>
@@ -114,10 +107,10 @@
         </article>
         <article class="big raised">
           <div class="big-head">
-            <p class="tag">Barbell · Shoulders</p>
+            <p class="eyebrow">Barbell · Shoulders</p>
             <h3>Overhead press</h3>
           </div>
-          <div class="readout well">
+          <div class="readout inset">
             <p class="digits">221</p>
             <p class="unit">kg, estimated 1RM</p>
             <p class="lb">487 lb</p>
@@ -133,28 +126,28 @@
 
     <section class="block" id="all-lifts" aria-labelledby="all-title">
       <header class="head">
-        <p class="kicker">All lifts</p>
-        <h2 id="all-title">The other 44</h2>
+        <p class="eyebrow">All lifts</p>
+        <h2 id="all-title">All other lifts</h2>
       </header>
       <div class="toolbar">
-        <label class="search well">
+        <label class="search inset">
           <span class="sr-only">Search lifts</span>
           <input type="search" id="lift-search" placeholder="Search lifts" autocomplete="off">
         </label>
         <div class="filters" role="group" aria-label="Filter by body part">
-          <button type="button" data-filter="all" aria-pressed="true">All</button>
-          <button type="button" data-filter="Legs" aria-pressed="false">Legs</button>
-          <button type="button" data-filter="Back" aria-pressed="false">Back</button>
-          <button type="button" data-filter="Chest" aria-pressed="false">Chest</button>
-          <button type="button" data-filter="Shoulders" aria-pressed="false">Shoulders</button>
-          <button type="button" data-filter="Biceps" aria-pressed="false">Biceps</button>
-          <button type="button" data-filter="Triceps" aria-pressed="false">Triceps</button>
-          <button type="button" data-filter="Forearms" aria-pressed="false">Forearms</button>
+          <button class="btn btn-sm" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="btn btn-sm" type="button" data-filter="Legs" aria-pressed="false">Legs</button>
+          <button class="btn btn-sm" type="button" data-filter="Back" aria-pressed="false">Back</button>
+          <button class="btn btn-sm" type="button" data-filter="Chest" aria-pressed="false">Chest</button>
+          <button class="btn btn-sm" type="button" data-filter="Shoulders" aria-pressed="false">Shoulders</button>
+          <button class="btn btn-sm" type="button" data-filter="Biceps" aria-pressed="false">Biceps</button>
+          <button class="btn btn-sm" type="button" data-filter="Triceps" aria-pressed="false">Triceps</button>
+          <button class="btn btn-sm" type="button" data-filter="Forearms" aria-pressed="false">Forearms</button>
         </div>
       </div>
       <p class="count" id="lift-count" aria-live="polite">44 lifts shown</p>
-      <ul class="lift-grid">
-          <li class="lift raised" data-part="Legs" data-search="abductor machine legs">
+      <ul class="grid auto lift-grid">
+          <li class="lift" data-part="Legs" data-search="abductor machine legs">
             <div class="lift-top">
               <h3>Abductor</h3>
               <span class="tag-kind">Machine</span>
@@ -162,7 +155,7 @@
             <p class="lift-set">85 × 100 kg</p>
             <p class="lift-est"><b>383.3</b><span>kg est. 1RM · 845 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="adductor machine legs">
+          <li class="lift" data-part="Legs" data-search="adductor machine legs">
             <div class="lift-top">
               <h3>Adductor</h3>
               <span class="tag-kind">Machine</span>
@@ -170,7 +163,7 @@
             <p class="lift-set">67 × 145 kg</p>
             <p class="lift-est"><b>468.3</b><span>kg est. 1RM · 1,032 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="barbell curl barbell biceps">
+          <li class="lift" data-part="Biceps" data-search="barbell curl barbell biceps">
             <div class="lift-top">
               <h3>Barbell Curl</h3>
               <span class="tag-kind">Barbell</span>
@@ -178,7 +171,7 @@
             <p class="lift-set">18 × 80 kg</p>
             <p class="lift-est"><b>128</b><span>kg est. 1RM · 282 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="barbell shrug barbell back">
+          <li class="lift" data-part="Back" data-search="barbell shrug barbell back">
             <div class="lift-top">
               <h3>Barbell Shrug</h3>
               <span class="tag-kind">Barbell</span>
@@ -186,7 +179,7 @@
             <p class="lift-set">60 × 100 kg</p>
             <p class="lift-est"><b>300</b><span>kg est. 1RM · 661 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="bent-over barbell row barbell back">
+          <li class="lift" data-part="Back" data-search="bent-over barbell row barbell back">
             <div class="lift-top">
               <h3>Bent-over barbell row</h3>
               <span class="tag-kind">Barbell</span>
@@ -194,7 +187,7 @@
             <p class="lift-set">55 × 100 kg</p>
             <p class="lift-est"><b>286</b><span>kg est. 1RM · 631 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="cable lateral raise machine shoulders">
+          <li class="lift" data-part="Shoulders" data-search="cable lateral raise machine shoulders">
             <div class="lift-top">
               <h3>Cable Lateral Raise</h3>
               <span class="tag-kind">Machine</span>
@@ -202,7 +195,7 @@
             <p class="lift-set">32 × 40 kg</p>
             <p class="lift-est"><b>82.7</b><span>kg est. 1RM · 182 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="chest press machine machine chest">
+          <li class="lift" data-part="Chest" data-search="chest press machine machine chest">
             <div class="lift-top">
               <h3>Chest Press Machine</h3>
               <span class="tag-kind">Machine</span>
@@ -210,7 +203,7 @@
             <p class="lift-set">100 × 100 kg</p>
             <p class="lift-est"><b>433.3</b><span>kg est. 1RM · 955 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="chest supported db row dumbbell back">
+          <li class="lift" data-part="Back" data-search="chest supported db row dumbbell back">
             <div class="lift-top">
               <h3>Chest Supported DB row</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -218,7 +211,7 @@
             <p class="lift-set">90 × 40 kg</p>
             <p class="lift-est"><b>160</b><span>kg est. 1RM · 353 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="db fly dumbbell chest">
+          <li class="lift" data-part="Chest" data-search="db fly dumbbell chest">
             <div class="lift-top">
               <h3>DB fly</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -226,7 +219,7 @@
             <p class="lift-set">10 × 40 kg</p>
             <p class="lift-est"><b>52</b><span>kg est. 1RM · 115 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="db lateral raise dumbbell shoulders">
+          <li class="lift" data-part="Shoulders" data-search="db lateral raise dumbbell shoulders">
             <div class="lift-top">
               <h3>DB Lateral Raise</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -234,7 +227,7 @@
             <p class="lift-set">36 × 24 kg</p>
             <p class="lift-est"><b>52.8</b><span>kg est. 1RM · 116 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="delt press machine machine shoulders">
+          <li class="lift" data-part="Shoulders" data-search="delt press machine machine shoulders">
             <div class="lift-top">
               <h3>Delt Press Machine</h3>
               <span class="tag-kind">Machine</span>
@@ -242,7 +235,7 @@
             <p class="lift-set">95 × 100 kg</p>
             <p class="lift-est"><b>416.7</b><span>kg est. 1RM · 919 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Triceps" data-search="dips bodyweight triceps">
+          <li class="lift" data-part="Triceps" data-search="dips bodyweight triceps">
             <div class="lift-top">
               <h3>Dips</h3>
               <span class="tag-kind">Bodyweight</span>
@@ -250,7 +243,7 @@
             <p class="lift-set">90 reps, bodyweight</p>
             <p class="lift-est"><b>300</b><span>kg est. 1RM · 661 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="dumbbell curl dumbbell biceps">
+          <li class="lift" data-part="Biceps" data-search="dumbbell curl dumbbell biceps">
             <div class="lift-top">
               <h3>Dumbbell curl</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -258,7 +251,7 @@
             <p class="lift-set">60 × 20 kg</p>
             <p class="lift-est"><b>60</b><span>kg est. 1RM · 132 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="french bar curl barbell biceps">
+          <li class="lift" data-part="Biceps" data-search="french bar curl barbell biceps">
             <div class="lift-top">
               <h3>French Bar Curl</h3>
               <span class="tag-kind">Barbell</span>
@@ -266,7 +259,7 @@
             <p class="lift-set">1 × 92 kg<span class="badge">Tested</span></p>
             <p class="lift-est"><b>92</b><span>kg est. 1RM · 203 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Forearms" data-search="grip strength (1 hand) bodyweight forearms">
+          <li class="lift" data-part="Forearms" data-search="grip strength (1 hand) bodyweight forearms">
             <div class="lift-top">
               <h3>Grip Strength (1 hand)</h3>
               <span class="tag-kind">Bodyweight</span>
@@ -274,7 +267,7 @@
             <p class="lift-set">1 × 109 kg<span class="badge">Tested</span></p>
             <p class="lift-est"><b>109</b><span>kg est. 1RM · 240 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="hammer dumbbell curl dumbbell biceps">
+          <li class="lift" data-part="Biceps" data-search="hammer dumbbell curl dumbbell biceps">
             <div class="lift-top">
               <h3>Hammer Dumbbell Curl</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -282,7 +275,7 @@
             <p class="lift-set">52 × 40 kg</p>
             <p class="lift-est"><b>109.4</b><span>kg est. 1RM · 241 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="hip thrusts barbell legs">
+          <li class="lift" data-part="Legs" data-search="hip thrusts barbell legs">
             <div class="lift-top">
               <h3>Hip Thrusts</h3>
               <span class="tag-kind">Barbell</span>
@@ -290,7 +283,7 @@
             <p class="lift-set">60 × 140 kg</p>
             <p class="lift-est"><b>420</b><span>kg est. 1RM · 926 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="incline bench press 30° barbell chest">
+          <li class="lift" data-part="Chest" data-search="incline bench press 30° barbell chest">
             <div class="lift-top">
               <h3>Incline Bench Press 30°</h3>
               <span class="tag-kind">Barbell</span>
@@ -298,7 +291,7 @@
             <p class="lift-set">40 × 102 kg</p>
             <p class="lift-est"><b>238</b><span>kg est. 1RM · 525 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="incline dumbbell press 30° dumbbell chest">
+          <li class="lift" data-part="Chest" data-search="incline dumbbell press 30° dumbbell chest">
             <div class="lift-top">
               <h3>Incline dumbbell press 30°</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -306,7 +299,7 @@
             <p class="lift-set">94 × 40 kg</p>
             <p class="lift-est"><b>165.3</b><span>kg est. 1RM · 364 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="lat pulldown machine back">
+          <li class="lift" data-part="Back" data-search="lat pulldown machine back">
             <div class="lift-top">
               <h3>Lat Pulldown</h3>
               <span class="tag-kind">Machine</span>
@@ -314,7 +307,7 @@
             <p class="lift-set">26 × 110 kg</p>
             <p class="lift-est"><b>205.3</b><span>kg est. 1RM · 453 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="leg press 45° machine legs">
+          <li class="lift" data-part="Legs" data-search="leg press 45° machine legs">
             <div class="lift-top">
               <h3>Leg Press 45°</h3>
               <span class="tag-kind">Machine</span>
@@ -322,7 +315,7 @@
             <p class="lift-set">53 × 355.5 kg</p>
             <p class="lift-est"><b>983</b><span>kg est. 1RM · 2,167 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="lying incline db curl dumbbell biceps">
+          <li class="lift" data-part="Biceps" data-search="lying incline db curl dumbbell biceps">
             <div class="lift-top">
               <h3>Lying Incline DB Curl</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -330,7 +323,7 @@
             <p class="lift-set">14 × 27 kg</p>
             <p class="lift-est"><b>39.6</b><span>kg est. 1RM · 87 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="lying leg curl machine legs">
+          <li class="lift" data-part="Legs" data-search="lying leg curl machine legs">
             <div class="lift-top">
               <h3>Lying Leg Curl</h3>
               <span class="tag-kind">Machine</span>
@@ -338,7 +331,7 @@
             <p class="lift-set">41 × 90 kg</p>
             <p class="lift-est"><b>213</b><span>kg est. 1RM · 470 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="machine preacher curl machine biceps">
+          <li class="lift" data-part="Biceps" data-search="machine preacher curl machine biceps">
             <div class="lift-top">
               <h3>Machine Preacher Curl</h3>
               <span class="tag-kind">Machine</span>
@@ -346,7 +339,7 @@
             <p class="lift-set">34 × 150 kg</p>
             <p class="lift-est"><b>320</b><span>kg est. 1RM · 705 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="nautilus straight pulldown machine back">
+          <li class="lift" data-part="Back" data-search="nautilus straight pulldown machine back">
             <div class="lift-top">
               <h3>Nautilus Straight Pulldown</h3>
               <span class="tag-kind">Machine</span>
@@ -354,7 +347,7 @@
             <p class="lift-set">14 × 80 kg</p>
             <p class="lift-est"><b>117.3</b><span>kg est. 1RM · 259 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="one arm db row dumbbell back">
+          <li class="lift" data-part="Back" data-search="one arm db row dumbbell back">
             <div class="lift-top">
               <h3>One arm DB Row</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -362,7 +355,7 @@
             <p class="lift-set">58 × 60 kg</p>
             <p class="lift-est"><b>175.3</b><span>kg est. 1RM · 386 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="pec fly machine machine chest">
+          <li class="lift" data-part="Chest" data-search="pec fly machine machine chest">
             <div class="lift-top">
               <h3>Pec Fly Machine</h3>
               <span class="tag-kind">Machine</span>
@@ -370,7 +363,7 @@
             <p class="lift-set">26 × 90 kg</p>
             <p class="lift-est"><b>168</b><span>kg est. 1RM · 370 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="pull-ups bodyweight back">
+          <li class="lift" data-part="Back" data-search="pull-ups bodyweight back">
             <div class="lift-top">
               <h3>Pull-ups</h3>
               <span class="tag-kind">Bodyweight</span>
@@ -378,7 +371,7 @@
             <p class="lift-set">43 reps, bodyweight</p>
             <p class="lift-est"><b>161</b><span>kg est. 1RM · 355 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="push-ups bodyweight chest">
+          <li class="lift" data-part="Chest" data-search="push-ups bodyweight chest">
             <div class="lift-top">
               <h3>Push-ups</h3>
               <span class="tag-kind">Bodyweight</span>
@@ -386,7 +379,7 @@
             <p class="lift-set">109 reps, bodyweight</p>
             <p class="lift-est"><b>440</b><span>kg est. 1RM · 970 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="rope hammer curl machine biceps">
+          <li class="lift" data-part="Biceps" data-search="rope hammer curl machine biceps">
             <div class="lift-top">
               <h3>Rope Hammer Curl</h3>
               <span class="tag-kind">Machine</span>
@@ -394,7 +387,7 @@
             <p class="lift-set">30 × 42.3 kg</p>
             <p class="lift-est"><b>84.6</b><span>kg est. 1RM · 187 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="seated cable row machine back">
+          <li class="lift" data-part="Back" data-search="seated cable row machine back">
             <div class="lift-top">
               <h3>Seated Cable Row</h3>
               <span class="tag-kind">Machine</span>
@@ -402,7 +395,7 @@
             <p class="lift-set">60 × 130 kg</p>
             <p class="lift-est"><b>390</b><span>kg est. 1RM · 860 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="seated calf raise machine legs">
+          <li class="lift" data-part="Legs" data-search="seated calf raise machine legs">
             <div class="lift-top">
               <h3>Seated Calf Raise</h3>
               <span class="tag-kind">Machine</span>
@@ -410,7 +403,7 @@
             <p class="lift-set">72 × 145 kg</p>
             <p class="lift-est"><b>493</b><span>kg est. 1RM · 1,087 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="seated db shoulder press 70° dumbbell shoulders">
+          <li class="lift" data-part="Shoulders" data-search="seated db shoulder press 70° dumbbell shoulders">
             <div class="lift-top">
               <h3>Seated DB Shoulder Press 70°</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -418,7 +411,7 @@
             <p class="lift-set">49 × 30 kg</p>
             <p class="lift-est"><b>79</b><span>kg est. 1RM · 174 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="seated leg curl machine legs">
+          <li class="lift" data-part="Legs" data-search="seated leg curl machine legs">
             <div class="lift-top">
               <h3>Seated Leg Curl</h3>
               <span class="tag-kind">Machine</span>
@@ -426,7 +419,7 @@
             <p class="lift-set">34 × 106 kg</p>
             <p class="lift-est"><b>226.1</b><span>kg est. 1RM · 498 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="sled press calf raise 45° machine legs">
+          <li class="lift" data-part="Legs" data-search="sled press calf raise 45° machine legs">
             <div class="lift-top">
               <h3>Sled Press Calf Raise 45°</h3>
               <span class="tag-kind">Machine</span>
@@ -434,7 +427,7 @@
             <p class="lift-set">19 × 510 kg</p>
             <p class="lift-est"><b>833</b><span>kg est. 1RM · 1,836 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Chest" data-search="smith bench press smith chest">
+          <li class="lift" data-part="Chest" data-search="smith bench press smith chest">
             <div class="lift-top">
               <h3>Smith Bench Press</h3>
               <span class="tag-kind">Smith</span>
@@ -442,7 +435,7 @@
             <p class="lift-set">30 × 149 kg</p>
             <p class="lift-est"><b>298</b><span>kg est. 1RM · 657 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="smith shoulder press 70° smith shoulders">
+          <li class="lift" data-part="Shoulders" data-search="smith shoulder press 70° smith shoulders">
             <div class="lift-top">
               <h3>Smith Shoulder Press 70°</h3>
               <span class="tag-kind">Smith</span>
@@ -450,7 +443,7 @@
             <p class="lift-set">22 × 90 kg</p>
             <p class="lift-est"><b>156.3</b><span>kg est. 1RM · 345 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Shoulders" data-search="standing db shoulder press dumbbell shoulders">
+          <li class="lift" data-part="Shoulders" data-search="standing db shoulder press dumbbell shoulders">
             <div class="lift-top">
               <h3>Standing DB Shoulder Press</h3>
               <span class="tag-kind">Dumbbell</span>
@@ -458,7 +451,7 @@
             <p class="lift-set">58 × 27 kg</p>
             <p class="lift-est"><b>79.2</b><span>kg est. 1RM · 175 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Biceps" data-search="straight bar cable bicep curl machine biceps">
+          <li class="lift" data-part="Biceps" data-search="straight bar cable bicep curl machine biceps">
             <div class="lift-top">
               <h3>Straight bar cable bicep curl</h3>
               <span class="tag-kind">Machine</span>
@@ -466,7 +459,7 @@
             <p class="lift-set">10 × 80 kg</p>
             <p class="lift-est"><b>106.6</b><span>kg est. 1RM · 235 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Back" data-search="t-bar rows machine back">
+          <li class="lift" data-part="Back" data-search="t-bar rows machine back">
             <div class="lift-top">
               <h3>T-bar rows</h3>
               <span class="tag-kind">Machine</span>
@@ -474,7 +467,7 @@
             <p class="lift-set">51 × 116 kg</p>
             <p class="lift-est"><b>313.2</b><span>kg est. 1RM · 690 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Triceps" data-search="triceps extension machine machine triceps">
+          <li class="lift" data-part="Triceps" data-search="triceps extension machine machine triceps">
             <div class="lift-top">
               <h3>Triceps Extension Machine</h3>
               <span class="tag-kind">Machine</span>
@@ -482,7 +475,7 @@
             <p class="lift-set">26 × 65 kg</p>
             <p class="lift-est"><b>121.3</b><span>kg est. 1RM · 267 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Triceps" data-search="triceps pushdown machine triceps">
+          <li class="lift" data-part="Triceps" data-search="triceps pushdown machine triceps">
             <div class="lift-top">
               <h3>Triceps Pushdown</h3>
               <span class="tag-kind">Machine</span>
@@ -490,7 +483,7 @@
             <p class="lift-set">1 × 130 kg<span class="badge">Tested</span></p>
             <p class="lift-est"><b>130</b><span>kg est. 1RM · 287 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Triceps" data-search="triceps rope pushdown machine triceps">
+          <li class="lift" data-part="Triceps" data-search="triceps rope pushdown machine triceps">
             <div class="lift-top">
               <h3>Triceps Rope Pushdown</h3>
               <span class="tag-kind">Machine</span>
@@ -498,7 +491,7 @@
             <p class="lift-set">6 × 96 kg</p>
             <p class="lift-est"><b>111</b><span>kg est. 1RM · 245 lb</span></p>
           </li>
-          <li class="lift raised" data-part="Legs" data-search="walking lunge barbell legs">
+          <li class="lift" data-part="Legs" data-search="walking lunge barbell legs">
             <div class="lift-top">
               <h3>Walking Lunge</h3>
               <span class="tag-kind">Barbell</span>
@@ -510,7 +503,7 @@
     </section>
 
     <section class="block" aria-labelledby="notes-title">
-      <div class="card raised notes">
+      <div class="card raised">
         <h2 id="notes-title">How to read these numbers</h2>
         <ul class="plain">
           <li><strong>Best set</strong> is the reps and kg on the Overview page for that lift.</li>
@@ -532,7 +525,7 @@
     var search = document.getElementById('lift-search');
     var count = document.getElementById('lift-count');
     var buttons = Array.prototype.slice.call(document.querySelectorAll('.filters button'));
-    var items = Array.prototype.slice.call(document.querySelectorAll('.lift-grid > li'));
+    var items = Array.prototype.slice.call(document.querySelectorAll('.lift-grid > li, .grid.auto > li'));
     var part = 'all';
 
     function apply() {
