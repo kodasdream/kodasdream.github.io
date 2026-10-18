@@ -319,6 +319,7 @@ a {
 .avatar {
   display: grid;
   place-items: center;
+  align-content: center;
   width: 84px;
   height: 84px;
   border-radius: 50%;
@@ -327,6 +328,7 @@ a {
   font-family: var(--display);
   font-size: 30px;
   font-weight: 500;
+  line-height: 1;
   letter-spacing: 0;
   color: var(--text);
 }
