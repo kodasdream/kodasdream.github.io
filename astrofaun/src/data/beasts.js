@@ -221,44 +221,97 @@ const STAGE_FLAVOR = [
 // ---------------------------------------------------------------- genome
 function pickW(rng, table) { return rng.weighted(table); }
 
+// Per-type character tendencies, distilled from the original game's beast art:
+// colored scleras and bright irises, attitude-giving lids, jagged-tooth grins, spiky fur tufts.
+const EYE_LOOK = {
+  common: [['cute', 3], ['iris', 3]],
+  flame: [['yellow', 3], ['iris', 2], ['cute', 1]],
+  aquatic: [['iris', 3], ['yellow', 2], ['cute', 1]],
+  snow: [['iris', 3], ['cute', 2], ['solid', 1]],
+  terra: [['iris', 3], ['yellow', 2]],
+  flora: [['cute', 3], ['iris', 2], ['yellow', 1]],
+  venom: [['yellow', 3], ['solid', 2], ['iris', 1]],
+  primal: [['yellow', 4], ['iris', 2]],
+  phantom: [['solid', 4], ['yellow', 2]],
+  lightning: [['yellow', 3], ['iris', 2]],
+  flying: [['iris', 3], ['yellow', 2], ['cute', 1]],
+  tech: [['iris', 3], ['solid', 2]],
+  flux: [['solid', 3], ['iris', 2], ['cute', 1]],
+};
+const IRIS = {
+  common: [0x6a3a1a, 0x2a7ad8, 0x3a9a3a, 0x7a4ad8], flame: [0xffb02e, 0xff5a1a, 0xffd23c], aquatic: [0xffd23c, 0x1a8ad8, 0x2ad0a0],
+  snow: [0x3a8aff, 0x6ad0ff, 0xb05ae6], terra: [0xff8a2a, 0x8a5a2a, 0x3a9a3a], flora: [0x3ac84a, 0xff6aa8, 0xc8a02a],
+  venom: [0x9ae03a, 0xd05ad8, 0xffd23c], primal: [0xffd23c, 0xff4a2a, 0x8ad83a], phantom: [0xffd23c, 0xff4a6a, 0x6af0e0],
+  lightning: [0x2a8aff, 0xffd23c, 0x9a5ae6], flying: [0xffa02a, 0x2a6ad8, 0x3ab06a], tech: [0x3ae0ff, 0xff5a3a, 0x7aff6a], flux: [0xff5fb8, 0x4ae0ff, 0xffd23c],
+};
+const MOUTH1 = { common: [['smile', 3], ['cat', 2], ['buck', 2], ['fang1', 1]], flame: [['fang1', 3], ['smile', 2], ['grin', 1]], aquatic: [['smile', 3], ['buck', 1], ['fang1', 1]],
+  snow: [['smile', 3], ['cat', 2], ['fang1', 1]], terra: [['buck', 2], ['smile', 2], ['grin', 1]], flora: [['smile', 3], ['cat', 2]], venom: [['grin', 2], ['fang1', 2], ['smile', 1]],
+  primal: [['fang1', 3], ['grin', 2]], phantom: [['grin', 2], ['maw', 1], ['smile', 1]], lightning: [['grin', 2], ['fang1', 2], ['smile', 1]], flying: [['smile', 2]], tech: [['grin', 2], ['smile', 2]], flux: [['smile', 2], ['grin', 1], ['cat', 1]] };
+const TUFT_HEAD = { common: [['none', 3], ['tuft', 2], ['curl', 1]], flame: [['spiky', 3], ['mohawk', 2], ['none', 1]], aquatic: [['none', 4], ['curl', 1]], snow: [['tuft', 2], ['curl', 2], ['none', 2]],
+  terra: [['none', 3], ['mohawk', 1]], flora: [['none', 3], ['curl', 1]], venom: [['none', 2], ['spiky', 2]], primal: [['spiky', 3], ['mohawk', 3], ['tuft', 1]], phantom: [['spiky', 2], ['none', 2], ['curl', 1]],
+  lightning: [['spiky', 4], ['mohawk', 2]], flying: [['tuft', 2], ['none', 2]], tech: [['none', 4]], flux: [['none', 2], ['curl', 2]] };
+const BUILDS = { biped: ['chibi', 'chibi', 'pear', 'athletic', 'hunch'], quad: ['stocky', 'low', 'tall', 'tall', 'stocky'], blob: ['round'], serpent: ['coil'], avian: ['plump', 'sleek'], bug: ['bug'], floater: ['drop'], fish: ['fish'] };
+
+// Bold two-tone schemes like the original game's beasts (purple+yellow, charcoal+ember, ice+pink...)
+const GLOBAL_PALETTES = [
+  [0x8a5ad8, 0x5a3aa8, 0xd8c0ff, 0xffd23c], [0x34303e, 0xff5a2a, 0x6a6474, 0xffd23c], [0xf0f6ff, 0x8ac8ff, 0xffffff, 0xff7ab0],
+  [0xff9a3a, 0xffd23c, 0xfff0c8, 0x3a2a1a], [0x5ac84a, 0xff6aa8, 0xd8f8a0, 0xffd23c], [0xff8ac0, 0xd85a9a, 0xffe0f0, 0x6a3aa8],
+  [0x5a6ae8, 0xd8343a, 0xb8c0ff, 0xffd23c], [0x7a4a5a, 0xe84a3a, 0xc8a0a8, 0xfff4e0], [0x2ab8a8, 0xff8a3a, 0xc8fff0, 0x1a4a5a],
+  [0xffd23c, 0x2e2a30, 0xfff4c0, 0xff4a2a], [0x2a3a7a, 0x4ae0ff, 0x8aa0d8, 0xffd23c], [0xa8e03a, 0x7a3ac8, 0xeaffc0, 0xffffff],
+  [0xa86a3a, 0x6a3a1a, 0xf8e0c0, 0x3ab0a0], [0x8a8a9a, 0xff7a2a, 0xd8d8e0, 0x2a2a3a], [0xd84ab0, 0x2ad0c8, 0xffc8ec, 0xfff06a],
+  [0xff6a5a, 0x2a3a6a, 0xffd8c8, 0xffd23c], [0x8af0c8, 0xff7a6a, 0xf0fff8, 0x3a6a5a], [0xb8a8f0, 0xe8b83a, 0xf4f0ff, 0x5a4a8a],
+  [0xc8283a, 0xffc83a, 0xffc8b0, 0x2a1418], [0x7ac8ff, 0xffffff, 0xe8f6ff, 0xff8a3a], [0x3a7a3a, 0xd8b878, 0xc8e8a8, 0xff5a3a],
+  [0x4a5868, 0xb0ff4a, 0x9aa8b8, 0x2a2a3a], [0x8a2a4a, 0xff8ab0, 0xe8a8c0, 0xffd8e8], [0xd8a83a, 0x2a8a9a, 0xfff0c0, 0x3a2a10],
+  [0x4ad8e8, 0x3a3ab8, 0xd8fbff, 0xffd23c], [0xe8e0d0, 0x5a4a3a, 0xffffff, 0xd84a3a], [0x2a2a40, 0x8a5aff, 0x5a5a80, 0x6af0e0],
+  [0xffb0d8, 0x8ad8ff, 0xfff0f8, 0x5a3a8a], [0x6a8a2a, 0x3a2a1a, 0xd8e8a0, 0xffd23c], [0xff7a1a, 0x3a1a3a, 0xffd0a0, 0x8af0ff],
+  [0x3a9aff, 0xffd23c, 0xd0ecff, 0x1a2a5a], [0xc0c8d8, 0x3a4a8a, 0xf4f6fa, 0xff5a5a],
+];
+
 function makeGenome(rng, el, el2, body) {
-  const pal = rng.pick(PALETTES[el]);
+  const pal = rng.chance(0.45) ? rng.pick(PALETTES[el]) : rng.pick(GLOBAL_PALETTES);
   const [main, second, belly, accent] = pal;
   let sec = second;
   if (el2 && rng.chance(0.6)) sec = rng.pick(PALETTES[el2])[0];
+  const look = pickW(rng, EYE_LOOK[el]);
+  const iris = rng.pick(IRIS[el]);
   const g = {
     body,
-    torso: { w: rng.range(0.85, 1.15), h: rng.range(0.85, 1.15), d: rng.range(0.85, 1.25) },
+    build: rng.pick(BUILDS[body]),
+    torso: { w: rng.range(0.82, 1.2), h: rng.range(0.82, 1.18), d: rng.range(0.82, 1.28) },
     head: {
-      size: rng.range(0.62, 0.82),
-      shape: rng.pick(['round', 'round', 'wide', 'tall', 'pear']),
+      size: rng.range(0.66, 0.88),
+      shape: rng.pick(['round', 'wide', 'wide', 'tall', 'pear', 'long', 'bulb', 'flat']),
       snout: rng.range(0, 1),
       snoutType: 'none',
+      jaw: rng.range(0, 1),
     },
-    ears: { type: pickW(rng, EARS[el]), size: rng.range(0.8, 1.25) },
-    horns: { type: pickW(rng, HORNS[el]), size: rng.range(0.7, 1.1) },
-    tail: { type: pickW(rng, TAILS[el]), size: rng.range(0.8, 1.2) },
-    wings: { type: 'none', size: rng.range(0.8, 1.2) },
-    back: { type: pickW(rng, BACKS[el]), size: rng.range(0.7, 1.0), count: rng.int(3, 5) },
+    ears: { type: pickW(rng, EARS[el]), size: rng.range(0.85, 1.35) },
+    horns: { type: pickW(rng, HORNS[el]), size: rng.range(0.75, 1.15) },
+    tail: { type: pickW(rng, TAILS[el]), size: rng.range(0.85, 1.3) },
+    wings: { type: 'none', size: rng.range(0.85, 1.2) },
+    back: { type: pickW(rng, BACKS[el]), size: rng.range(0.75, 1.05), count: rng.int(3, 5) },
     eyes: {
-      size: rng.range(0.24, 0.32),
-      spacing: rng.range(0.34, 0.5),
-      style: rng.pick(['big', 'big', 'big', 'happy', 'sleepy']),
+      size: rng.range(0.2, 0.3),
+      spacing: rng.range(0.32, 0.5),
       count: 2,
-      iris: rng.pick([0x1a1a2a, 0x1a1a2a, shade(pal[3], -0.1), 0x2a1a0a]),
+      look,
+      sclera: look === 'yellow' ? rng.pick([0xffe04a, 0xfff07a, 0xffd23c]) : look === 'solid' ? iris : 0xffffff,
+      iris: look === 'cute' ? rng.pick([0x1a1a2a, 0x2a1a0a, iris]) : iris,
+      pupil: look === 'yellow' ? rng.pick(['slit', 'dot', 'dot']) : look === 'solid' ? rng.pick(['dot', 'none', 'slit']) : 'round',
+      lid: rng.pick(['none', 'none', 'smug', 'sleepy', 'sad']),
+      tilt: rng.range(-0.15, 0.25),
     },
-    mouth: { type: rng.pick(['smile', 'smile', 'open', 'fangs', 'cat']) },
-    limbs: { len: rng.range(0.8, 1.2), thick: rng.range(0.85, 1.2) },
-    cheeks: rng.chance(0.45),
-    antenna: false,
+    mouth: { type: pickW(rng, MOUTH1[el]), teeth: rng.int(4, 7), w: rng.range(0.85, 1.25) },
+    tufts: { head: pickW(rng, TUFT_HEAD[el]), cheek: rng.chance(el === 'primal' || el === 'snow' || el === 'common' ? 0.6 : 0.3), chest: rng.chance(0.3), mane: el === 'primal' && rng.chance(0.5) },
+    limbs: { len: rng.range(0.8, 1.25), thick: rng.range(0.85, 1.25) },
+    cheeks: rng.chance(0.3),
     palette: { main, second: sec, belly, accent, horn: rng.chance(0.5) ? accent : shade(belly, -0.05) },
-    pattern: { type: pickW(rng, PATTERNS), scale: rng.range(2.4, 4.2), color: rng.chance(0.5) ? sec : shade(main, -0.18, 0.05) },
+    pattern: { type: pickW(rng, PATTERNS), scale: rng.range(2.4, 4.2), color: rng.chance(0.55) ? shade(main, -0.22, 0.05) : sec },
     float: false,
     scale: 1,
   };
   if (el === 'flame') g.palette.flame = [0xff4a1a, 0xffb02e, 0xffe46a];
   if (el === 'phantom' || el2 === 'phantom') g.palette.wisp = shade(main, 0.15);
-  // Body specific tweaks
   if (body === 'avian') {
     g.wings.type = 'feather';
     g.head.snoutType = 'beak';
@@ -269,17 +322,19 @@ function makeGenome(rng, el, el2, body) {
     g.wings.type = rng.chance(0.6) ? 'insect' : 'none';
     g.horns.type = rng.chance(0.6) ? 'antenna' : g.horns.type;
     g.limbs.count = 6;
-    g.mouth.type = rng.pick(['fangs', 'smile', 'mandible']);
+    g.mouth.type = rng.pick(['mandible', 'grin', 'fang1']);
   } else if (body === 'fish') {
     g.tail.type = 'fin';
     g.ears.type = 'fin';
     g.float = true;
     g.back.type = rng.chance(0.7) ? 'fins' : g.back.type;
+    if (rng.chance(0.6)) g.mouth.type = 'grin';
   } else if (body === 'floater') {
     g.float = true;
     if (g.tail.type !== 'flame' && g.tail.type !== 'crystal') g.tail.type = 'wisp';
   } else if (body === 'serpent') {
     g.wings.type = el === 'flying' || el2 === 'flying' ? 'feather' : 'none';
+    g.head.shape = rng.pick(['long', 'wide', 'round']);
   } else if (body === 'quad') {
     g.head.snoutType = rng.pick(['muzzle', 'muzzle', 'none', 'snout']);
   } else if (body === 'biped') {
@@ -294,15 +349,15 @@ function makeGenome(rng, el, el2, body) {
   if ((el === 'venom' || el === 'flora') && body === 'bug' && g.wings.type === 'none' && rng.chance(0.5)) g.wings.type = 'insect';
   if (el === 'aquatic' && g.head.snoutType === 'muzzle' && rng.chance(0.4)) g.head.snoutType = 'beak';
   if (el === 'terra' && body === 'quad' && rng.chance(0.3)) g.head.snoutType = 'trunk';
-  if (el === 'tech') { g.metal = true; g.eyes.style = rng.pick(['visor', 'big', 'big']); }
+  if (el === 'tech') { g.metal = true; if (rng.chance(0.35)) g.eyes.look = 'visor'; }
   if (el === 'phantom' || el === 'flux') {
     const r = rng.next();
     if (r < 0.25) g.eyes.count = 1;
     else if (r < 0.4) g.eyes.count = 3;
   }
   if (el === 'venom' && body === 'bug' && rng.chance(0.3)) g.eyes.count = 3;
+  if (g.eyes.count === 1) g.eyes.size *= 1.25;
   if (el2 && rng.chance(0.5)) {
-    // borrow a trait from the secondary type
     const slot = rng.pick(['back', 'tail', 'horns', 'ears']);
     const table = { back: BACKS, tail: TAILS, horns: HORNS, ears: EARS }[slot][el2];
     g[slot].type = pickW(rng, table);
@@ -310,34 +365,45 @@ function makeGenome(rng, el, el2, body) {
   return g;
 }
 
+const MOUTH_UP = { smile: 'grin', cat: 'fang1', buck: 'grin', fang1: 'grin', grin: 'maw', maw: 'maw', tusks: 'tusks', beak: 'beak', mandible: 'mandible' };
+const LID_UP = { none: 'smug', smug: 'angry', sleepy: 'smug', sad: 'angry', angry: 'angry' };
+
 function evolveGenome(base, stage, rng) {
   const g = JSON.parse(JSON.stringify(base));
   if (stage === 1) return g;
-  const k = stage - 1; // 1 or 2
-  g.scale = 1 + 0.32 * k + rng.range(-0.04, 0.06);
-  g.head.size *= 1 - 0.08 * k;
-  g.eyes.size *= 1 - 0.1 * k;
-  if (stage === 3 && g.eyes.style !== 'visor') g.eyes.style = rng.chance(0.75) ? 'fierce' : 'big';
-  else if (stage === 2 && g.eyes.style === 'sleepy') g.eyes.style = 'big';
-  g.limbs.len *= 1 + 0.12 * k;
-  g.torso.h *= 1 + 0.05 * k;
-  g.torso.d *= 1 + 0.06 * k;
+  const k = stage - 1;
+  g.scale = 1 + 0.34 * k + rng.range(-0.04, 0.06);
+  g.head.size *= 1 - 0.1 * k;
+  g.head.jaw = Math.min(1, g.head.jaw + 0.25 * k);
+  g.eyes.size *= 1 - 0.14 * k;
+  g.eyes.lid = stage === 3 ? (rng.chance(0.8) ? 'angry' : LID_UP[g.eyes.lid]) : LID_UP[g.eyes.lid];
+  if (g.eyes.look === 'cute' && rng.chance(0.5 * k)) g.eyes.look = 'iris';
+  if (stage === 3 && g.eyes.look === 'iris' && rng.chance(0.3)) { g.eyes.look = 'yellow'; g.eyes.sclera = 0xffe04a; g.eyes.pupil = 'slit'; }
+  g.mouth.type = MOUTH_UP[g.mouth.type] || g.mouth.type;
+  if (stage === 3 && g.mouth.type === 'grin' && rng.chance(0.4)) g.mouth.type = rng.pick(['maw', 'tusks']);
+  g.mouth.teeth += 2 * k;
+  g.mouth.w *= 1 + 0.12 * k;
+  g.limbs.len *= 1 + 0.14 * k;
+  g.limbs.thick *= 1 + 0.08 * k;
+  g.torso.h *= 1 + 0.06 * k;
+  g.torso.d *= 1 + 0.08 * k;
   g.ears.size *= 1 + 0.12 * k;
-  g.tail.size *= 1 + 0.15 * k;
-  g.wings.size *= 1 + 0.12 * k;
-  g.back.size *= 1 + 0.22 * k;
+  g.tail.size *= 1 + 0.18 * k;
+  g.wings.size *= 1 + 0.15 * k;
+  g.back.size *= 1 + 0.25 * k;
   g.back.count = Math.min(7, g.back.count + k);
-  g.horns.size *= 1 + 0.25 * k;
+  g.horns.size *= 1 + 0.3 * k;
   if (g.horns.type === 'none' && rng.chance(0.35 * k)) g.horns.type = rng.pick(['nub', 'spike', 'curl']);
   if (g.horns.type === 'nub' && stage === 3) g.horns.type = rng.pick(['curl', 'ram', 'spike']);
   if (g.back.type === 'none' && stage === 3 && rng.chance(0.6)) g.back.type = rng.pick(['spikes', 'tufts', 'plates']);
-  if (g.mouth.type === 'smile' && stage === 3 && rng.chance(0.6)) g.mouth.type = rng.pick(['fangs', 'tusks']);
-  if (stage >= 2 && g.cheeks && rng.chance(0.5)) g.cheeks = false;
-  // Colors get slightly deeper and richer with age
+  if (g.tufts.head === 'none' && rng.chance(0.3 * k)) g.tufts.head = rng.pick(['spiky', 'tuft', 'mohawk']);
+  if (stage === 3) { g.tufts.cheek = g.tufts.cheek || rng.chance(0.4); g.tufts.mane = g.tufts.mane || rng.chance(0.25); }
+  if (g.build === 'chibi' && stage >= 2) g.build = rng.pick(['athletic', 'hunch', 'pear']);
+  if (stage >= 2 && g.cheeks && rng.chance(0.6)) g.cheeks = false;
   const p = g.palette;
-  p.main = shade(p.main, -0.03 * k, 0.04 * k);
-  p.second = shade(p.second, -0.03 * k, 0.04 * k);
-  if (stage === 3 && g.pattern.type === 'none' && rng.chance(0.5)) g.pattern.type = rng.pick(['stripes', 'patches', 'gradient']);
+  p.main = shade(p.main, -0.03 * k, 0.05 * k);
+  p.second = shade(p.second, -0.03 * k, 0.05 * k);
+  if (stage === 3 && g.pattern.type === 'none' && rng.chance(0.6)) g.pattern.type = rng.pick(['stripes', 'patches', 'gradient']);
   return g;
 }
 
@@ -509,7 +575,8 @@ function roleFor(rng, body) {
     g.legendary = true;
     if (g.wings.type === 'none' && body !== 'serpent') g.wings.type = rng.pick(['feather', 'bat']);
     if (g.horns.type === 'none') g.horns.type = rng.pick(['curl', 'crystal', 'antler', 'unicorn']);
-    g.eyes.style = 'fierce';
+    g.eyes.lid = 'angry';
+    g.mouth.type = g.mouth.type === 'beak' ? 'beak' : 'maw';
     const family = { id: FAMILIES.length, el, el2, rarity: 'legendary', body, role, members: [id] };
     FAMILIES.push(family);
     SPECIES.push({

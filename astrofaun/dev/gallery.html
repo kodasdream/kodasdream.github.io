@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Beast gallery</title>
+<style>html,body{margin:0;height:100%;background:#000}canvas{display:block;width:100%;height:100%}#info{position:fixed;left:8px;top:8px;color:#fff;font:12px monospace;text-shadow:0 1px 2px #000}</style></head>
+<body><canvas id="c"></canvas><div id="info"></div>
+<script type="module">
+import { THREE, initRenderer, envFor, makeLights } from '../src/render/renderer.js';
+import { biomeTextures, bakeSpace, grassSampler } from '../src/render/textures.js';
+import { PropBatch, biomePropOpts } from '../src/render/props.js';
+import { buildIsland, islandMaterials, blobCells } from '../src/render/island.js';
+import { makeBeast, animateBeast } from '../src/render/beastMesh.js';
+import { updateOutlineScale } from '../src/render/toon.js';
+import { BIOMES } from '../src/data/planets.js';
+import { SPECIES } from '../src/data/beasts.js';
+import { RNG } from '../src/core/util.js';
+const params = new URLSearchParams(location.search);
+const start = +(params.get('start') || 1), count = +(params.get('n') || 24), biomeId = params.get('biome') || 'meadow';
+const canvas = document.getElementById('c');
+const renderer = initRenderer(canvas, params.get('q') || 'medium');
+renderer.setSize(innerWidth, innerHeight, false);
+const scene = new THREE.Scene();
+const biome = BIOMES[biomeId];
+scene.background = bakeSpace(biome.space, innerWidth, innerHeight, 3);
+scene.environment = envFor(biomeId, biome);
+const lights = makeLights(scene, biome);
+const tex = biomeTextures(biome, biomeId);
+const mats = islandMaterials(tex, biome);
+const rng = new RNG(5);
+const big = params.get('island') === 'big';
+const cells = blobCells(rng, big ? 22 : 18, big ? 18 : 14, 0.95).map(([x, z]) => [x - (big ? 11 : 9), z - (big ? 9 : 7)]);
+const isl = buildIsland(cells, { mats, seed: 3, depth: 4, thickness: 1.5 });
+scene.add(isl.group);
+if (big) {
+  const c2 = blobCells(new RNG(9), 9, 8, 0.9).map(([x, z]) => [x + 13, z - 2]);
+  const i2 = buildIsland(c2, { mats, seed: 7, y: -0.6, depth: 3 });
+  scene.add(i2.group);
+  const c3 = blobCells(new RNG(11), 7, 6, 0.9).map(([x, z]) => [x - 4, z - 6]);
+  const i3 = buildIsland(c3, { mats, seed: 9, y: 0.7, thickness: 0.7, under: false });
+  scene.add(i3.group);
+}
+if (params.get('props') !== '0') {
+  const pb = new PropBatch(biomePropOpts(biome, biomeId));
+  const gs = grassSampler(tex.mask.map, biome.grassAmt);
+  const pr = new RNG(77);
+  const scatter = (isl, cellsList) => {
+    for (const [cx, cz] of cellsList) {
+      if (!isl.walkable.has(cx + ',' + cz)) continue;
+      const x = cx + pr.range(0.15, 0.85), z = cz + pr.range(0.15, 0.85);
+      const y = isl.heightAt(x, z);
+      const g = gs(x, z);
+      const f = isl.fieldAt(x, z);
+      if (count > 0 && Math.abs(x) < 7 && Math.abs(z) < 6) continue;
+      const r = pr.next();
+      if (g > 0.02) { if (r < 0.35) pb.add('grasstuft', pr.int(0, 5), x, y, z, pr.range(0, 6)); else if (r < 0.42) pb.add('flowers', pr.int(0, 5), x, y, z, pr.range(0, 6)); else if (r < 0.47) pb.add(pr.pick(biome.trees), pr.int(0, 5), x, y, z, pr.range(0, 6)); }
+      else if (r < 0.05) pb.add(pr.pick(biome.trees), pr.int(0, 5), x, y, z, pr.range(0, 6));
+      else if (r < 0.09) pb.add('rock', pr.int(0, 5), x, y, z, pr.range(0, 6));
+      else if (r < 0.105 && f > 1.5) pb.add('boulder', pr.int(0, 5), x, y, z, pr.range(0, 6));
+    }
+  };
+  scatter(isl, cells);
+  scene.add(pb.build());
+}
+const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 300);
+const fr = +(params.get('fr') || 7);
+const aspect = innerWidth / innerHeight;
+cam.left = -fr * aspect; cam.right = fr * aspect; cam.top = fr; cam.bottom = -fr; cam.updateProjectionMatrix();
+const d = 40; cam.position.set(d, d * 0.82, d); cam.lookAt(0, 0, 0);
+const beasts = [];
+const cols = Math.ceil(Math.sqrt(count * 1.4));
+for (let i = 0; i < count && start + i <= SPECIES.length; i++) {
+  const b = makeBeast(start + i, params.get('variant') === '1');
+  const cx = i % cols, cz = Math.floor(i / cols);
+  const x = (cx - cols / 2) * 1.9 + 0.8, z = (cz - count / cols / 2) * 1.9 + 0.8;
+  b.position.set(x, isl.heightAt(x, z), z);
+  b.rotation.y = Math.PI / 4;
+  scene.add(b); beasts.push(b);
+}
+lights.follow(new THREE.Vector3());
+document.getElementById('info').textContent = beasts.map((b, i) => (start + i) + ':' + SPECIES[start + i - 1].name).join(' ');
+const clock = new THREE.Clock();
+let frames = 0;
+function loop() { if (params.get('anim') !== '1' && frames++ > 2) { window.__done = true; return; } const t = clock.getElapsedTime(); for (const b of beasts) animateBeast(b, t, 0.016, 'idle'); updateOutlineScale(cam, innerHeight); renderer.render(scene, cam); requestAnimationFrame(loop); }
+loop();
+window.__ready = true;
+</script></body></html>
