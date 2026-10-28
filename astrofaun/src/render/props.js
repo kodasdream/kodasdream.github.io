@@ -367,6 +367,23 @@ const BUILDERS = {
     }
     return out;
   },
+  thickgrass(rng, B) {
+    const out = { matte: [], gloss: [] };
+    const col = B.thick || [0x2a7a2e, 0x6ac83a, 0xa8e85a];
+    const n = rng.int(16, 22);
+    for (let i = 0; i < n; i++) {
+      const a = rng.range(0, Math.PI * 2);
+      const r0 = rng.range(0, 0.32);
+      const h = rng.range(0.55, 0.95);
+      const bx = Math.cos(a) * r0, bz = Math.sin(a) * r0;
+      const lean = rng.range(0.1, 0.35);
+      const g = G.taperTube([V(bx, 0, bz), V(bx * 1.2 + Math.cos(a) * lean * 0.3, h * 0.55, bz * 1.2 + Math.sin(a) * lean * 0.3), V(bx * 1.4 + Math.cos(a) * lean, h, bz * 1.4 + Math.sin(a) * lean)], 0.07, 0.006, 4, 6, false);
+      out.gloss.push(G.paint(g, (p) => (p.y / h < 0.45 ? mixHex(col[0], col[1], p.y / h / 0.45) : mixHex(col[1], col[2], (p.y / h - 0.45) / 0.55))));
+    }
+    const base = G.sphere(0.42, 0.18, 0.42, 14, 8);
+    out.gloss.push(G.paint(base, col[0]));
+    return out;
+  },
   spore(rng, B) {
     const out = { matte: [], gloss: [] };
     for (let i = 0; i < 4; i++) {
