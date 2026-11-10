@@ -77,7 +77,7 @@ const page = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Best lifts, Zsombor Cservid</title>
+  <title>Best lifts, Cservid Zsombor</title>
   <meta name="description" content="Best sets and estimated one-rep maxes from the Overview page of my Strength Sheet.">
   <meta name="theme-color" content="#ece8df">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -92,7 +92,7 @@ const page = `<!doctype html>
 
   <header class="topbar">
     <div class="wrap bar">
-      <a class="brand" href="../">Zsombor Cservid</a>
+      <a class="brand" href="../">Cservid Zsombor</a>
       <nav class="nav" aria-label="Pages">
         <a href="../">Main page</a>
         <a href="./" aria-current="page">Lifting</a>
@@ -154,7 +154,7 @@ const page = `<!doctype html>
   </main>
 
   <footer class="wrap foot">
-    <p>© 2026 Zsombor Cservid</p>
+    <p>© 2026 Cservid Zsombor</p>
     <p><a href="../">Main page</a></p>
   </footer>
 
